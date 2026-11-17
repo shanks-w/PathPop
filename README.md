@@ -12,6 +12,12 @@ PathPop 把这几步缩短为一个动作：**直接在 Agent 对话中选中它
 
 **[下载安装包](https://github.com/shanks-w/PathPop/releases/latest)** · macOS 14.0+ · Apple 芯片 / Intel · 免费开源
 
+## 看看效果
+
+![PathPop 操作演示：选中 Agent 给出的本机路径，按快捷键，Finder 定位并高亮文件](docs/assets/pathpop-demo.gif)
+
+动图由示例对话与 Finder 截图制作，按操作步骤播放。图中的 `Option + D` 是自定义快捷键；默认快捷键为 `Control + Option + Command + R`。
+
 ## 能做什么
 
 - **选中即定位**：默认快捷键为 `⌃⌥⌘R`，也可以自定义。
