@@ -10,6 +10,8 @@ PathPop 把这几步缩短为一个动作：**直接在 Agent 对话中选中它
 
 它只定位并高亮，不会打开文件。
 
+**[下载安装包](https://github.com/shanks-w/PathPop/releases/latest)** · macOS 14.0+ · Apple 芯片 / Intel · 免费开源
+
 ## 能做什么
 
 - **选中即定位**：默认快捷键为 `⌃⌥⌘R`，也可以自定义。
@@ -37,9 +39,22 @@ file:///Users/yourname/Documents/project%20notes.txt
 
 > PathPop 定位的是你这台 Mac 上真实存在的文件。它不会下载远程文件，也不能把其他电脑或云端环境中的路径变成本机文件。
 
-## 获取与构建
+## 下载与安装
 
-当前提供源码，需要自行构建；暂不提供经过 Apple 公证的安装包。
+无需 Xcode，也不用自己构建。
+
+1. 打开 [GitHub Releases](https://github.com/shanks-w/PathPop/releases/latest)，下载 `PathPop-版本号-universal.dmg`（Apple 芯片和 Intel Mac 通用，要求 macOS 14.0 或更新版本）。
+2. 打开 DMG，把 `PathPop.app` 拖到 `Applications`（应用程序）文件夹。
+3. 从“应用程序”启动 PathPop。它只显示菜单栏图标，没有主窗口或 Dock 图标。
+4. 按提示开启辅助功能权限，然后选中路径、按快捷键即可定位。
+
+安装包使用 ad-hoc 签名，**尚未使用 Apple Developer ID 签名或经过 Apple 公证**。首次打开时，如果 macOS 提示无法验证开发者，请先确认下载来源是本仓库的 Releases，再按 [Apple 官方指引](https://support.apple.com/zh-cn/102445)，在“系统设置 → 隐私与安全”中选择“仍要打开”并确认。无需关闭系统安全功能。
+
+请先安装到“应用程序”再授权，不要从 DMG 内长期运行。更新时先从菜单栏退出旧版本，再替换应用；若旧权限失效，按下文重新添加。可以为“应用程序”中的 PathPop 创建桌面替身，方便以后双击启动。
+
+每次发布附带 `SHA256SUMS`，可用 `shasum -a 256 -c SHA256SUMS` 核对下载文件。
+
+## 从源码构建
 
 要求：
 
@@ -71,7 +86,7 @@ open ./build/Build/Products/Debug/PathPop.app
 
 ### 已开启权限，仍反复提示怎么办？
 
-自行重新构建后，临时签名可能改变，系统中的旧授权可能不再匹配。可以这样处理：
+更新安装包或自行重新构建后，临时签名可能改变，系统中的旧授权可能不再匹配。可以这样处理：
 
 1. 退出 PathPop。
 2. 在上述权限列表中移除旧的 PathPop 条目。
@@ -93,6 +108,14 @@ open ./build/Build/Products/Debug/PathPop.app
 - 当前没有内置“登录时启动”或自动更新功能。
 
 ## 开发与测试
+
+制作包含 Apple 芯片和 Intel 两种架构的 Release 安装包：
+
+```bash
+bash scripts/package.sh
+```
+
+产物位于 `build/releases/v版本号/`，包含 DMG 和 `SHA256SUMS`。脚本使用独立构建目录，不会替换 Debug 应用；当前生成的是 ad-hoc 签名、未公证的安装包。
 
 运行基础回归测试：
 
